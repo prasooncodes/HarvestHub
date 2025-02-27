@@ -22,6 +22,7 @@ app.use(
       "http://localhost:5173", 
       "http://localhost:5174", 
       "http://localhost:4999",
+      "http://localhost:5175",
       "https://cropmate.onrender.com", 
       "https://crop-mate-33nf5j7jj-sanjus-projects.vercel.app", 
       "https://crop-mate.vercel.app"
