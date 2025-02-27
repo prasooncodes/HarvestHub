@@ -43,7 +43,7 @@ const Signup = () => {
         );
         const { success, message, token } = data;
         if(token){
-          Cookies.set('token', token, { expires: 7 }); // Set cookie to expire in 7 days
+          Cookies.set('token', token, { expires: 7 });
         }
         if (success) {
           handleSuccess(message);
@@ -71,54 +71,108 @@ const Signup = () => {
     };
   
   return (
-    <div className="signup_container" style={{ backgroundImage: `url("LOGIN.png")`, backgroundSize: "cover" }}>
-    <div className="form_container" >
-      <h1 style={{marginTop:-250, fontFamily: "cursive", 
-fontStyle: "italic bold ", fontSize:"60px"}} >Crop Mate</h1>
-          <h2 style={{}}>Signup Account</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={email}
-                placeholder="Enter your email"
-                onChange={handleOnChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                name="name"
-                value={name}
-                placeholder="Enter your Name"
-                onChange={handleOnChange}
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={password}
-                placeholder="Enter your password"
-                onChange={handleOnChange}
-                required
-              />
-            </div>
-            <button type="submit">Submit</button>
-            <span>
-              Already have an account? <Link to={"/login"}>Login</Link>
-            </span>
-          </form>
-      <Toaster />
-        </div>
-        </div>
-  )
-}
+    <div className="signup_container" style={{ 
+      backgroundImage: `url("LOGIN.png")`, 
+      backgroundSize: "cover",
+      minHeight: "100vh",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
+      <div className="form_container" style={{
+        backgroundColor: "white",
+        padding: "2rem",
+        borderRadius: "10px",
+        boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+        width: "100%",
+        maxWidth: "400px"
+      }}>
+        <h1 style={{
+          marginTop: 0,
+          marginBottom: "1rem",
+          fontFamily: "Montserrat, Lato", 
+          fontStyle: "bold", 
+          fontSize: "60px",
+          color: "#5FAD8C",
+          textAlign: "center"
+        }}>Harvest Hub</h1>
+        
+        <h2 style={{
+          marginTop: "1rem",
+          marginBottom: "1.5rem",
+          textAlign: "center"
+        }}>Join Harvest Hub</h2>
+        
+        <form onSubmit={handleSubmit}>
+          <div className="form-floating" style={{ marginBottom: "1rem" }}>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={handleOnChange}
+              required
+              style={{ padding: "0.75rem" }}
+            />
+            <label htmlFor="email">Email</label>
+          </div>
+          
+          <div className="form-floating" style={{ marginBottom: "1rem" }}>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              value={name}
+              placeholder="Enter your Name"
+              onChange={handleOnChange}
+              required
+              style={{ padding: "0.75rem" }}
+            />
+            <label htmlFor="name">Name</label>
+          </div>
+          
+          <div className="form-floating" style={{ marginBottom: "1.5rem" }}>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={password}
+              placeholder="Enter your password"
+              onChange={handleOnChange}
+              required
+              style={{ padding: "0.75rem" }}
+            />
+            <label htmlFor="password">Password</label>
+          </div>
+          
+          <button type="submit" style={{
+            width: "100%",
+            padding: "0.75rem",
+            backgroundColor: "#5FAD8C",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            fontSize: "1rem",
+            marginBottom: "1rem"
+          }}>Sign Up</button>
+          
+          <span style={{
+            display: "block",
+            textAlign: "center",
+            marginTop: "1rem"
+          }}>
+            Already have an account? <Link to={"/login"} style={{ color: "#5FAD8C" }}>Login</Link>
+          </span>
+        </form>
+        <Toaster />
+      </div>
+    </div>
+  );
+};
 
-export default Signup
+export default Signup;

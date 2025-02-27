@@ -13,6 +13,8 @@
 label {
   font-size: 1.2rem;
   color: #656262;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
 }
 
 html,
@@ -22,72 +24,109 @@ body {
   width: 100%;
 }
 
-
 body {
   background-color: #5FAD8C;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-
-
 .form_container {
   background-color: #fff;
-  padding: 25rem 3rem; 
-  border-radius: 0.5rem;
+  padding: 3rem 3rem; /* Reduced from 25rem to make it more compact */
+  border-radius: 1rem; /* Increased roundness */
   width: 100%;
-  max-width: 400px;
-  max-height: 400px;
-  box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
+  max-width: 450px;
+  max-height: none; /* Remove height restriction */
+  box-shadow: 0 10px 30px rgba(95, 173, 140, 0.3); /* Softer shadow with brand color */
+  position: relative;
+  overflow: hidden;
 }
 
+/* Add a decorative element */
+.form_container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, #5FAD8C, #84a98c, #5FAD8C);
+}
 
 .form_container > h2 {
   margin-block: 1rem;
   padding-block: 0.6rem;
-  color: #84a98c; 
+  color: #5FAD8C; /* Match brand color */
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 600;
 }
 
 .form_container > form {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
-  
 }
 
 .form_container div {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  
 }
 
+/* Improve form inputs */
 .form_container input {
   border: none;
-  padding: 0.5rem;
-  border-bottom: 1px solid #354f52; 
+  padding: 0.8rem;
+  border-radius: 0.5rem;
   font-size: 1.1rem;
   outline: none;
-  
+  background-color: #f5f5f5;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+.form_container input:focus {
+  background-color: #fff;
+  box-shadow: 0 0 0 2px rgba(95, 173, 140, 0.3);
 }
 
 .form_container input::placeholder {
   font-size: 0.9rem;
   font-style: italic;
+  color: #aaa;
 }
 
+/* Enhance buttons */
 .form_container button {
-  background-color: #2f3e46;
+  background: linear-gradient(to right, #5FAD8C, #84a98c);
   color: #fff;
   border: none;
-  padding: 0.6rem;
-  font-size: 1rem;
+  padding: 0.8rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  margin-top: 1rem;
 }
 
+.form_container button:hover {
+  background: linear-gradient(to right, #84a98c, #5FAD8C);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(95, 173, 140, 0.2);
+}
+
+/* Style links */
 span a {
   text-decoration: none;
-  color: rgba(0, 212, 255, 1);
+  color: #5FAD8C;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+span a:hover {
+  color: #84a98c;
+  text-decoration: underline;
 }
 
 .new_card{
@@ -104,7 +143,6 @@ span a {
   background-color: #c9d4f8 
 }
 
-
 .home_page button {
   background-color: #354f52; 
   color: #fff;
@@ -114,11 +152,28 @@ span a {
   border-radius: 2rem;
   transition: ease-in 0.3s;
   border: none;
-  
 }
 
 .home_page button:hover {
   background-color: rgba(0, 212, 255, 1);
+}
+
+/* Login and Signup page specific styles */
+.login_page, .signup_page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.login_page {
+  background: linear-gradient(135deg, #f3ac87 0%, #5FAD8C 100%);
+}
+
+.signup_page {
+  background: linear-gradient(135deg, #5FAD8C 0%, #f3ac87 100%);
 }
 
 @media only screen and (max-width: 1200px) {
@@ -129,7 +184,27 @@ span a {
     padding: 0.6rem 1rem;
     font-size: 1.5rem;
   }
+  
+  .form_container {
+    max-width: 90%;
+    padding: 2rem;
+  }
 }
+
+@media only screen and (max-width: 600px) {
+  .form_container {
+    padding: 1.5rem;
+  }
+  
+  .form_container > h2 {
+    font-size: 1.5rem;
+  }
+  
+  .form_container input {
+    padding: 0.6rem;
+  }
+}
+
 .container {
   max-width: 100%; 
   margin: 0 auto; 
@@ -137,6 +212,7 @@ span a {
   background-color:#f3ac87;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
 }
+
 .heading_container {
   background-color: #7a5243;
   text-align: center;
@@ -171,7 +247,6 @@ span a {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   /* margin-top: 100px;  */
-
 }
 
 .soil_container h3 {
@@ -179,44 +254,6 @@ span a {
   text-align: center;
   margin-bottom: 20px;
 }
-
-/* Form Elements */
-/* .form-floating {
-  margin-bottom: 20px;
-}
-
-.form-floating input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.form-floating input:focus {
-  outline: none;
-  border-color: #25aae1; 
-}
-
-.form-floating label {
-  pointer-events: none; 
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: #333;
-  transition: 0.3s ease-in-out;
-}
-
-.form-floating input:focus + label,
-.form-floating input:not(:placeholder-shown) + label {
-  font-size: 12px;
-  top: 0;
-  transform: translateY(0);
-  color: #25aae1;
-} */
-
 
 .col-md-4 button {
   width: 100%;
@@ -234,16 +271,10 @@ span a {
   background-position: 100% 0;
 }
 
-
-  
-  
-  
-
 /* Navbar.css */
 .navbar-brand {
   font-size: 1.5rem;
   color: #e74d46; 
-
 }
 
 .navbar-nav .nav-link {
@@ -263,5 +294,38 @@ span a {
   color: #0f5256;
 }
 
+/* Animation for form elements */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
+.form_container > form > div {
+  animation: fadeIn 0.5s ease-out forwards;
+}
 
+.form_container > form > div:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.form_container > form > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.form_container > form > div:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.form_container button {
+  animation: fadeIn 0.5s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+/* Form validation visual feedback */
+.form_container input:valid {
+  border-left: 3px solid #5FAD8C;
+}
+
+.form_container input:invalid:not(:placeholder-shown) {
+  border-left: 3px solid #e74c3c;
+}
