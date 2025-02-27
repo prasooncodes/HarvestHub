@@ -1,6 +1,7 @@
 const User = require("../Models/UserModel");
 const { createSecretToken } = require("../util/SecretToken");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports.Signup = async (req, res, next) => {
   try {
@@ -38,30 +39,44 @@ module.exports.Signup = async (req, res, next) => {
 module.exports.Login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-
-    if(!email || !password) {
-      return res.status(400).json({ message: 'All fields are required', success: false });
+    
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ message: "All fields are required", success: false });
     }
     
+    // Find user by email
     const user = await User.findOne({ email });
-    if(!user) {
-      return res.status(401).json({ message: 'Invalid Email', success: false }); 
+    if (!user) {
+      return res.status(401).json({ message: "Incorrect email or password", success: false });
     }
     
+    // Compare passwords
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
-      return res.status(401).json({ message: 'Incorrect password', success: false }); 
+      return res.status(401).json({ message: "Incorrect email or password", success: false });
     }
     
+    // Create token
     const token = createSecretToken(user._id);
+    
+    // Set cookie
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false,
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
     
-    return res.status(200).json({ message: "User logged in successfully", success: true, user, token: token });
-     
+    // Return success response
+    return res.status(200).json({
+      message: "User logged in successfully",
+      success: true,
+      token,
+      user: user.name,
+      id: user._id,
+      language: user.language || 'en'
+    });
+    
   } catch (error) {
     console.error("Login error:", error);
     return res.status(500).json({ message: "Server error during login", success: false });
