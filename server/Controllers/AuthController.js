@@ -48,16 +48,16 @@ module.exports.Login = async (req, res, next) => {
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: "Incorrect email or password", success: false });
+      return res.status(401).json({ message: "Invalid email or password", success: false });
     }
     
-    // Compare passwords
-    const auth = await bcrypt.compare(password, user.password);
-    if (!auth) {
-      return res.status(401).json({ message: "Incorrect email or password", success: false });
+    // Verify password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid email or password", success: false });
     }
     
-    // Create token
+    // Generate token
     const token = createSecretToken(user._id);
     
     // Set cookie
@@ -67,14 +67,16 @@ module.exports.Login = async (req, res, next) => {
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
     
-    // Return success response
+    // Send response
     return res.status(200).json({
       message: "User logged in successfully",
       success: true,
-      token,
-      user: user.name,
-      id: user._id,
-      language: user.language || 'en'
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email
+      },
+      token: token
     });
     
   } catch (error) {
