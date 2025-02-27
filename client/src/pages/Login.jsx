@@ -3,9 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import Cookies from 'js-cookie';
-import url from '../url'
-
-
+import url from '../url';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,12 +23,12 @@ const Login = () => {
   const handleError = (err) =>
     toast.error(err, {
       position: 'top-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
     });
   const handleSuccess = (msg) =>
     toast.success('User Logged in Successfully')
@@ -45,12 +43,10 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      // console.log(data);
 
-      const { success, message,token } = data;
+      const { success, message, token } = data;
       if(token){
-        
-      Cookies.set('token', token);
+        Cookies.set('token', token, { expires: 7 }); // Set cookie to expire in 7 days
       }
       if (success) {
         handleSuccess(message);
@@ -61,7 +57,13 @@ const Login = () => {
         handleError(message);
       }
     } catch (error) {
-      // console.log(error);
+      console.error("Login error:", error);
+      
+      if (error.response && error.response.status === 401) {
+        handleError(error.response.data.message || "Invalid credentials");
+      } else {
+        handleError(error.response?.data?.message || "An error occurred during login. Please try again.");
+      }
     }
     setInputValue({
       ...inputValue,
@@ -86,6 +88,7 @@ fontStyle: "italic bold ", fontSize:"60px"}} >Crop Mate</h1>
             value={email}
             placeholder="Enter your email"
             onChange={handleOnChange}
+            required
           />
           <label htmlFor="email">Email</label>
           
@@ -98,12 +101,13 @@ fontStyle: "italic bold ", fontSize:"60px"}} >Crop Mate</h1>
             value={password}
             placeholder="Enter your password"
             onChange={handleOnChange}
+            required
           />          
           <label htmlFor="password">Password</label>
         </div>
         <button type="submit">Submit</button>
         <span>
-          Already have an account? <Link to={"/signup"}>Signup</Link>
+          Don't have an account? <Link to={"/signup"}>Signup</Link>
         </span>
       </form>
       <Toaster />

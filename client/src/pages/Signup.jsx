@@ -5,7 +5,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import url from '../url';
 
-
 const Signup = () => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
@@ -42,10 +41,10 @@ const Signup = () => {
           },
           { withCredentials: true }
         );
-        const { success, message,token } = data;
+        const { success, message, token } = data;
         if(token){
-          Cookies.set('token', token);
-          }
+          Cookies.set('token', token, { expires: 7 }); // Set cookie to expire in 7 days
+        }
         if (success) {
           handleSuccess(message);
           setTimeout(() => {
@@ -55,7 +54,13 @@ const Signup = () => {
           handleError(message);
         }
       } catch (error) {
-        // console.log(error);
+        console.error("Signup error:", error);
+        
+        if (error.response && error.response.status === 409) {
+          handleError("This email is already registered. Please use a different email or log in.");
+        } else {
+          handleError(error.response?.data?.message || "An error occurred during signup. Please try again.");
+        }
       }
       setInputValue({
         ...inputValue,
@@ -65,9 +70,7 @@ const Signup = () => {
       });
     };
   
-
   return (
-    
     <div className="signup_container" style={{ backgroundImage: `url("LOGIN.png")`, backgroundSize: "cover" }}>
     <div className="form_container" >
       <h1 style={{marginTop:-250, fontFamily: "cursive", 
@@ -82,16 +85,18 @@ fontStyle: "italic bold ", fontSize:"60px"}} >Crop Mate</h1>
                 value={email}
                 placeholder="Enter your email"
                 onChange={handleOnChange}
+                required
               />
             </div>
             <div>
-              <label htmlFor="email">Name</label>
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 name="name"
                 value={name}
                 placeholder="Enter your Name"
                 onChange={handleOnChange}
+                required
               />
             </div>
             <div>
@@ -102,6 +107,7 @@ fontStyle: "italic bold ", fontSize:"60px"}} >Crop Mate</h1>
                 value={password}
                 placeholder="Enter your password"
                 onChange={handleOnChange}
+                required
               />
             </div>
             <button type="submit">Submit</button>
