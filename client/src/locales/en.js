@@ -1,7 +1,7 @@
 const enTranslations = {
     Title: "HarvestHub",
     LSlogan:'Grow the right crop that complements you soil.',
-    LDesc:'CropMate provides personalized crop recommendations to farmers, leveraging advanced machine learning techniques to optimize crop yields and sustainability.',
+    LDesc:'HarvestHub provides personalized crop recommendations to farmers, leveraging advanced machine learning techniques to optimize crop yields and sustainability.',
     LButton:'GET STARTED',
     NHome:'Home',
     NUpdate:'Update',
