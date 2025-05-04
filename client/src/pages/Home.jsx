@@ -87,7 +87,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="home_page">
+      <div className="home_page" style={{ backgroundImage: `url(${homeBG})` }}>
         <div className="new_card">
         
         {crops.length > 0 && <NewCropCard crop={crops[0]} crops={crops}  />}

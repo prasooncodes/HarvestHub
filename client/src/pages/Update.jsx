@@ -8,6 +8,8 @@ import url from '../url';
 import LanguageSelector from '../components/LanguageSelector';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
+import updateBG from '../assets/update_BG.jpg';
+
 
 const id = Cookies.get("id");
 const lang = Cookies.get('language');
