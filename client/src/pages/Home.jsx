@@ -88,6 +88,17 @@ const Home = () => {
     <>
       <div className="home_page">
         <div className="new_card">
+        <img 
+      src="/home_BG.jpg" 
+      alt="Home banner"
+      style={{
+        width: '100%',
+        maxWidth: '1000px',
+        height: 'auto',
+        margin: '20px auto',
+        borderRadius: '10px'
+      }}
+    />
         {crops.length > 0 && <NewCropCard crop={crops[0]} crops={crops}  />}
         </div>
 
