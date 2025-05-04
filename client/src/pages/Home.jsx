@@ -13,6 +13,7 @@ import { FaInstagram, FaTwitter } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import url from '../url';
+import homeBG from '../assets/home_BG.jpg';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -88,17 +89,7 @@ const Home = () => {
     <>
       <div className="home_page">
         <div className="new_card">
-        <img 
-      src="/home_BG.jpg" 
-      alt="Home banner"
-      style={{
-        width: '100%',
-        maxWidth: '1000px',
-        height: 'auto',
-        margin: '20px auto',
-        borderRadius: '10px'
-      }}
-    />
+        
         {crops.length > 0 && <NewCropCard crop={crops[0]} crops={crops}  />}
         </div>
 
