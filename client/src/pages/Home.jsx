@@ -1,4 +1,4 @@
-  import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Cookies from 'js-cookie';
@@ -55,78 +55,46 @@ const Home = () => {
   }, [cookies, navigate, removeCookie]);
 
   useEffect(() => {
-    // Fetch data from your API
-    if (window.config.id) { // Check if window.config.id is available
+    if (window.config.id) {
       axios.post(`${url}/Cropfetch`, { id: window.config.id })
         .then(response => {
-          // Extract crop names from the response
           const { Crop1, Crop2, Crop3, Crop4, Crop5 } = response.data;
-  
-          // Store crop names in an array
           const cropNames = [Crop1, Crop2, Crop3, Crop4, Crop5];
+          const cropDetailsArray = [];
 
-        // Create an array to store crop details
-        const cropDetailsArray = [];
+          for (const cropName of cropNames) {
+            const cropDetails = getCropDetails(cropName);
+            cropDetailsArray.push(cropDetails);
+          }
 
-        // Loop through crop names and fetch details for each crop
-        for (const cropName of cropNames) {
-          const cropDetails = getCropDetails(cropName);
-          cropDetailsArray.push(cropDetails);
-        }
-
-        // Set the fetched crop details in state
-        setCrops(cropDetailsArray);
+          setCrops(cropDetailsArray);
         })
         .catch(error => {
           console.error('Error fetching crops:', error);
         });
     }
-  }, [window.config.id]); // Run whenever window.config.id changes
-  
-
+  }, [window.config.id]);
 
   return (
     <>
       <div className="home_page" style={{ backgroundImage: `url(${homeBG})` }}>
         <div className="new_card">
-        
-        {crops.length > 0 && <NewCropCard crop={crops[0]} crops={crops}  />}
+          {crops.length > 0 && (
+            <div className="crop-details-container">
+              <NewCropCard crop={crops[0]} crops={crops} />
+            </div>
+          )}
         </div>
-
-
         
         <div className="card_container">
-        {/* {crops.length > 0 && <TopCropCard crop={crops[0]} />}
-          {crops.length > 0 && <RestCropCards crops={crops} />} */}
+          {crops.length > 0 && (
+            <div className="crop-details-container">
+              <TopCropCard crop={crops[0]} />
+              <RestCropCards crops={crops} />
+            </div>
+          )}
         </div>
       </div>
-      
-      {/* <div className="footer_columns">
-        <div className="contact_details">
-          <p> <h3>Contact</h3></p>
-          <p>Email: cropmate@email.com</p>
-          <p>Phone: +1234567890</p>
-        </div>
-        <div className="footer_row"></div>
-          <div className="footer_column">
-            <h3>Account</h3>
-            <p>
-              <Link to="/signup">Create an account</Link> 
-            </p>
-          </div>
-          
-          <div className="footer_column">
-            <h3>Follow Us</h3>
-            <p className="footer_icons">
-              <a href="https://www.instagram.com">
-                <FaInstagram style={{ fontSize: "24px", marginRight: "10px" }} />
-              </a>
-              <a href="https://www.twitter.com">
-                <FaTwitter style={{ fontSize: "24px" }} />
-              </a>
-            </p>
-          </div>
-        </div> */}
       
       <ToastContainer />
     </>

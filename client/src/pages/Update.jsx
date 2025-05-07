@@ -8,7 +8,7 @@ import url from '../url';
 import LanguageSelector from '../components/LanguageSelector';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
-import updateBG from '../assets/update_BG.jpg';
+import updateBG from '../assets/home_BG.jpg';
 
 
 const id = Cookies.get("id");
@@ -132,7 +132,14 @@ const Update = () => {
   };
 
   return (
-    <div className="soil">
+    <div className="soil" style={{
+      backgroundImage: `url(${updateBG})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      minHeight: '100vh',
+      width: '100%'
+    }}>
 
     <div style={{ display:"flex", paddingTop:20,height : '100%'}} className="flex-container">
       
