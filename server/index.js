@@ -24,8 +24,8 @@ app.use(
       "http://localhost:4999",
       "http://localhost:5175",
       "https://cropmate.onrender.com", 
-      "https://crop-mate-33nf5j7jj-sanjus-projects.vercel.app", 
-      "https://crop-mate.vercel.app"
+      "https://vercel.com/prasoonmishra9936-gmailcoms-projects/harvesthub-client/FA8XQVzTyV18KmdVcqgA2uSruW4B", 
+      "https://harvesthub-client.vercel.app/"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,

@@ -24,7 +24,7 @@ const Start = () => {
         </div>
       </div>
       <div style={styles.imageContainer}>
-        <img src="slider-dec.gif" alt="Crop" style={styles.image} />
+        <img src="/farm-farming.gif" alt="Crop" style={styles.image} />
       </div>
     </div>
   );
