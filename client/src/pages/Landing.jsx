@@ -5,22 +5,23 @@ import { useTranslation } from 'react-i18next';
 
 
 const Landing = () => {
-const navigate = useNavigate();
-const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
-const Start = () => {
-  navigate("/update");
-};
+  const Start = () => {
+    navigate("/update");
+  };
+
   return (
     <div style={styles.container}>
       <div style={styles.textContainer}>
-        <div style={styles.blob}>
+        <div style={styles.card}>
           <h1 style={styles.title}>{t('Title')}</h1>
           <h2 style={styles.subtitle}>{t('LSlogan')}</h2>
-          <p style={styles.description}>
-          {t('LDesc')}
-          </p>
-          <button className="btnu-hover color-2" style={styles.button} onClick={Start}>{t('LButton')}</button>
+          <p style={styles.description}>{t('LDesc')}</p>
+          <button style={styles.button} onClick={Start}>
+            {t('LButton')}
+          </button>
         </div>
       </div>
       <div style={styles.imageContainer}>
@@ -32,57 +33,77 @@ const Start = () => {
 
 const styles = {
   container: {
-    backgroundColor: "#c9d4f8",
+    background: 'linear-gradient(135deg, #c8e6c9, #66bb6a)',
     display: 'flex',
+    flexWrap: 'wrap',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    // height: '100vh',
-    padding: '0 50px',
-    position: 'relative',
+    justifyContent: 'center',
+    padding: '60px 30px',
+    minHeight: '100vh',
+    gap: '40px',
+    fontFamily: "'Poppins', sans-serif",
   },
   textContainer: {
-    height: '100vh',
-    marginTop: '40px',  
-    position: 'relative',
+    flex: 1,
+    minWidth: '300px',
+    maxWidth: '600px',
+    display: 'flex',
+    justifyContent: 'center',
   },
-  blob: {
-    backgroundImage: 'url(blob.png)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    // margin: '40px',
-    padding: '100px',
-    borderRadius: '20px',
+  card: {
+    background: 'rgba(255, 255, 255, 0.12)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    backdropFilter: 'blur(14px)',
+    WebkitBackdropFilter: 'blur(14px)',
+    borderRadius: '30px',
+    padding: '50px 40px',
+    boxShadow: '0 25px 60px rgba(0, 0, 0, 0.2)',
+    textAlign: 'center',
   },
   title: {
-    fontSize: '5em',
-    marginBottom: '10px',
-    color: '#fff',
+    fontSize: '2.8rem',
+    marginBottom: '16px',
+    color: '#1b5e20',
+    fontWeight: 700,
   },
   subtitle: {
-    fontSize: '2em',
-    marginBottom: '20px',
-    color: '#fff',
+    fontSize: '1.4rem',
+    marginBottom: '12px',
+    color: '#2e7d32',
+    fontWeight: 600,
   },
   description: {
-    fontSize: '1.2em',
+    fontSize: '1rem',
     marginBottom: '30px',
-    maxWidth: '500px',
-    color: '#fff',
+    lineHeight: '1.7',
+    color: '#33691e',
+    fontWeight: 400,
   },
   button: {
-    padding: '10px 20px',
-    fontSize: '1em',
+    padding: '8px 20px',
+    fontSize: '0.85rem',
+    fontWeight: 600,
+    backgroundColor: '#43a047',
+    color: '#ffffff',
     border: 'none',
-    borderRadius: '5px',
+    borderRadius: '999px',
     cursor: 'pointer',
+    transition: 'all 0.3s ease-in-out',
+    boxShadow: '0 5px 12px rgba(76, 175, 80, 0.35)',
   },
   imageContainer: {
-    // zIndex: 1,
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minWidth: '300px',
+    maxWidth: '600px',
   },
   image: {
-    marginTop: '-60px',
-    width: '500px',
+    maxWidth: '100%',
     height: 'auto',
+    borderRadius: '24px',
+    boxShadow: '0 15px 30px rgba(0,0,0,0.25)',
   },
 };
 
