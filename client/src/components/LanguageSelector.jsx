@@ -24,7 +24,6 @@ const LanguageSelector = ({ selectedLanguage, setSelectedLanguage }) => {
     { code: 'or', name: 'ଓଡିଆ (Oriya)' , full: 'Oriya'  },
     { code: 'ta', name: 'தமிழ் (Tamil)' , full: 'Tamil'  },
     { code: 'te', name: 'తెలుగు (Telugu)', full: 'Telugu'   },
-    { code: 'ur', name: 'اردو (Urdu)', full: 'Urdu'   },
 ];
 
 

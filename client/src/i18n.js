@@ -12,7 +12,6 @@ import orTranslations from '../src/locales/or';
 import paTranslations from '../src/locales/pa';
 import taTranslations from '../src/locales/ta';
 import teTranslations from '../src/locales/te';
-import urTranslations from '../src/locales/ur';
 import Cookies from 'js-cookie'; // Import js-cookie
 
 const resources = {
@@ -48,9 +47,6 @@ const resources = {
   },
   te: {
     translation: teTranslations
-  },
-  ur: {
-    translation: urTranslations
   },
 };
 
