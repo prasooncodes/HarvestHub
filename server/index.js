@@ -8,7 +8,7 @@ const dataRoute = require("./Routes/DataRoute");
 const cropRoute = require("./Routes/CropRoute");
 const postRoute = require("./Routes/PostRoute");
 const commentRoute = require("./Routes/CommentRoute");
-const { PORT } = process.env;
+const { PORT } = process.env.PORT || 4999;
 
 const app = express();
 
@@ -18,14 +18,9 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
-      "http://localhost:4000", 
-      "http://localhost:5173", 
-      "http://localhost:5174", 
-      "http://localhost:4999",
-      "http://localhost:5175",
-      "https://cropmate.onrender.com", 
-      "https://vercel.com/prasoonmishra9936-gmailcoms-projects/harvesthub-client/FA8XQVzTyV18KmdVcqgA2uSruW4B", 
-      "https://harvesthub-client.vercel.app/"
+      "http://localhost:5173",  
+      "https://harvesthub-client.vercel.app",  
+      "https://harvesthub-ro0t.onrender.com"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
@@ -38,6 +33,10 @@ app.use("/", dataRoute);
 app.use("/", cropRoute);
 app.use("/", postRoute);
 app.use("/", commentRoute);
+
+app.get("/", (req, res) => {
+  res.json({ message: "HarvestHub API is running" });
+});
 
 // Connect to database and start server
 connectDB().then(() => {
