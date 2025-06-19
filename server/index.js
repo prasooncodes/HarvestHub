@@ -8,7 +8,7 @@ const dataRoute = require("./Routes/DataRoute");
 const cropRoute = require("./Routes/CropRoute");
 const postRoute = require("./Routes/PostRoute");
 const commentRoute = require("./Routes/CommentRoute");
-const { PORT } = process.env.PORT || 4999;
+const  PORT = process.env.PORT || 4999;
 
 const app = express();
 
