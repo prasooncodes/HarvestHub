@@ -1,4 +1,4 @@
-const https = require("https");
+import { request } from "https";
 
 const getGrowingSuggestion = (cropName) => {
   const options = {
@@ -17,7 +17,7 @@ const getGrowingSuggestion = (cropName) => {
     web_access: false,
   });
 
-  const req = https.request(options, (res) => {
+  const req = request(options, (res) => {
     let data = "";
 
     res.on("data", (chunk) => {
