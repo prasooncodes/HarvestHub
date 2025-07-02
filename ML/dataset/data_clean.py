@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def wrangle_and_format_crop_data(input_file='C:\\Users\\Prafful Joshi\\OneDrive\\Desktop\\HarvestHub\\ML\\dataset\\Crop_recommendation.csv', output_file='C:\\Users\\Prafful Joshi\\OneDrive\\Desktop\\HarvestHub\\ML\\dataset\\crop_recommendation_new.csv'):
+def wrangle_and_format_crop_data(input_file='ML\dataset\Crop_recommendation.csv', output_file='ML/dataset/crop_recommendation_new.csv'):
 
     try:
         # Read the CSV file
