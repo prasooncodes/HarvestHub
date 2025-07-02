@@ -74,8 +74,8 @@ module.exports.dataToML = async (req, res, next) => {
     const { id, Nitrogen, Phosphorus, Potassium, Temperature, Humidity, pH, Rainfall } = req.body;
 
     try {
-        // Make a request to the Flask ML API
-        const mlApiResponse = await axios.post('http://localhost:5000/predict', {
+        // Make a request to the Flask ML API - using 127.0.0.1 instead of localhost to force IPv4
+        const mlApiResponse = await axios.post('http://127.0.0.1:5000/predict', {
             id,
             Nitrogen,
             Phosphorus,
@@ -86,12 +86,31 @@ module.exports.dataToML = async (req, res, next) => {
             Rainfall
         });
 
-        // Optionally, you can handle the response from the ML API here
-
         // Return the response to the client (React Native app)
         res.status(200).json(mlApiResponse.data);
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        console.error('Error connecting to ML API:', error.message);
+        
+        // Provide more specific error messages
+        if (error.code === 'ECONNREFUSED') {
+            return res.status(503).json({ 
+                message: 'ML prediction service is unavailable. Please ensure the Flask server is running on port 5000.',
+                error: 'SERVICE_UNAVAILABLE'
+            });
+        }
+        
+        if (error.response) {
+            // The ML API responded with an error status
+            return res.status(error.response.status).json({
+                message: 'ML API error',
+                error: error.response.data
+            });
+        }
+        
+        // Generic server error
+        res.status(500).json({ 
+            message: 'Internal server error',
+            error: 'UNKNOWN_ERROR'
+        });
     }
 };
